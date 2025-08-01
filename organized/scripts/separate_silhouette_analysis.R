@@ -79,7 +79,7 @@ sil_mensch <- silhouette(kmeans_mensch$cluster, dist(cluster_data_mensch_clean))
 # =============================================================================
 
 # Function to create traditional silhouette plot with Readme styling
-create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD3C8", "#ABCD9B", "#BE4B5A")) {
+create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD3C8", "#ABCD9B", "#BE4B5A"), group_type = "ki") {
   # Convert silhouette object to data frame
   sil_df <- data.frame(
     cluster = sil_data[, 1],
@@ -97,8 +97,12 @@ create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD
   # Sort by the final ordering
   sil_df <- sil_df[order(sil_df$final_order), ]
   
-  # Create cluster labels
-  cluster_labels <- c("Cluster 1", "Cluster 2", "Cluster 3")
+  # Create cluster labels based on group type
+  if (group_type == "ki") {
+    cluster_labels <- c("KI-Offen", "Ambivalent", "KI-Skeptisch")
+  } else {
+    cluster_labels <- c("Emotional Offen", "Ambivalent", "Emotional Distanziert")
+  }
   
   # Create traditional silhouette plot with cluster grouping
   p <- ggplot(sil_df, aes(x = sil_width, y = reorder(seq_along(sil_width), final_order), 
@@ -111,6 +115,7 @@ create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD
          fill = "Cluster") +
     geom_vline(xintercept = 0, color = "black", linewidth = 0.5) +
     geom_vline(xintercept = mean(sil_df$sil_width), color = "red", linewidth = 0.8, linetype = "dashed") +
+    geom_hline(yintercept = seq(5, nrow(sil_df), by = 5), color = "gray80", linewidth = 0.5, alpha = 0.7) +
     theme_minimal() +
     theme(
       axis.title = element_text(size = 11, family = "Times New Roman"),
@@ -119,7 +124,7 @@ create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD
       plot.title = element_text(size = 12, hjust = 0.5, face = "bold", family = "Times New Roman"),
       legend.title = element_text(size = 11, family = "Times New Roman"),
       legend.text = element_text(size = 10, family = "Times New Roman"),
-      panel.grid.major = element_line(color = "gray90"),
+      panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       panel.background = element_rect(fill = "white", color = NA),
       plot.background = element_rect(fill = "white", color = NA),
@@ -139,8 +144,8 @@ create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD
 }
 
 # Create silhouette plots for both groups
-sil_plot_ki <- create_traditional_silhouette_plot(sil_ki, "Silhouette-Analyse: KI-Gruppe")
-sil_plot_mensch <- create_traditional_silhouette_plot(sil_mensch, "Silhouette-Analyse: Mensch-Gruppe")
+sil_plot_ki <- create_traditional_silhouette_plot(sil_ki, "Silhouette-Analyse: KI-Gruppe", group_type = "ki")
+sil_plot_mensch <- create_traditional_silhouette_plot(sil_mensch, "Silhouette-Analyse: Mensch-Gruppe", group_type = "mensch")
 
 # =============================================================================
 # SAVE SEPARATE PLOTS
