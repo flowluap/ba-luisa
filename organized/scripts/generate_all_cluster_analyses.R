@@ -11,6 +11,7 @@ library(gridExtra)
 library(grid)
 library(gtable)
 library(ggplot2)
+library(tidyr)
 
 cat("================================================================================\n")
 cat("GENERATE ALL CLUSTER ANALYSES - MASTER SCRIPT\n")
@@ -308,7 +309,49 @@ dev.off()
 
 cat("✓ cluster_prozent_tabelle.png erstellt\n")
 
+# =============================================================================
+# 4. GENERATE AGE CLUSTER TABLE
+# =============================================================================
 
+cat("\n=== 4. GENERATE AGE CLUSTER TABLE ===\n")
+
+# Perform clustering for entire dataset
+all_data_cluster <- perform_clustering_logical(data_processed, "ALL")
+
+# Add cluster information to data
+data_processed$Cluster <- all_data_cluster$clusters
+data_processed$Cluster_Name <- all_data_cluster$cluster_means$cluster_name[all_data_cluster$clusters]
+
+# Create age groups
+data_processed$Age_Group <- cut(data_processed$SO01, 
+                               breaks = c(17, 25, 35, 45, 55, 100),
+                               labels = c("18-25", "26-35", "36-45", "46-55", "56+"),
+                               include.lowest = TRUE)
+
+# Count persons by cluster and age group
+age_cluster_counts <- data_processed %>%
+  group_by(Cluster_Name, Age_Group) %>%
+  summarise(Count = n(), .groups = 'drop') %>%
+  filter(Age_Group %in% c("18-25", "26-35", "36-45", "46-55")) %>%
+  pivot_wider(names_from = Age_Group, values_from = Count, values_fill = 0)
+
+# Create APA table for age clusters
+age_cluster_table <- create_apa_table(age_cluster_counts, "Age Cluster Distribution")
+
+# Save
+png("organized/images/clustering/age_cluster_table.png", 
+    width = 1600, height = 300, res = 300, bg = "white")
+grid.newpage()
+
+# Create viewport with more space at top
+vp <- viewport(x = 0.5, y = 0.4, width = 0.98, height = 0.7, just = c("center", "center"))
+pushViewport(vp)
+grid.draw(age_cluster_table)
+popViewport()
+
+dev.off()
+
+cat("✓ age_cluster_table.png erstellt\n")
 
 # =============================================================================
 # SUMMARY
@@ -321,6 +364,7 @@ cat("Generated files:\n")
 cat("1. organized/images/clustering/ki_specific_apa.png\n")
 cat("2. organized/images/clustering/human_specific_apa.png\n")
 cat("3. organized/images/clustering/cluster_prozent_tabelle.png\n")
+cat("4. organized/images/clustering/age_cluster_table.png\n")
 cat("\nData summary:\n")
 cat("• KI-Gruppe: N =", nrow(data_ki), "\n")
 cat("• Mensch-Gruppe: N =", nrow(data_mensch), "\n")

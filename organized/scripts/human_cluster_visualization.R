@@ -1,8 +1,8 @@
 # =============================================================================
-# KI CLUSTER VISUALIZATION
+# HUMAN CLUSTER VISUALIZATION
 # =============================================================================
-# Erstellt eine Visualisierung der KI-Cluster basierend auf den Daten
-# aus ki_specific_apa.png und cluster_prozent_tabelle.png
+# Erstellt eine Visualisierung der Mensch-Cluster basierend auf den Daten
+# aus human_specific_apa.png
 
 library(dplyr)
 library(ggplot2)
@@ -15,11 +15,11 @@ cat("Lade Daten...\n")
 data <- read.delim("organized/data/Bereinigte Daten von WhatsApp Business.csv", 
                    fileEncoding = "UTF-16LE", stringsAsFactors = FALSE)
 
-# Filter data (FINISHED=1 and AB01=1 for KI group)
+# Filter data (FINISHED=1 and AB01=2 for Mensch group)
 data_processed <- data %>% filter(FINISHED == 1)
-data_ki <- data_processed %>% filter(AB01 == 1)
+data_mensch <- data_processed %>% filter(AB01 == 2)
 
-cat("✓ KI-Gruppe: n =", nrow(data_ki), "\n")
+cat("✓ Mensch-Gruppe: n =", nrow(data_mensch), "\n")
 
 # =============================================================================
 # PERFORM CLUSTERING
@@ -33,10 +33,10 @@ id_cols <- c("ID01_01", "ID01_02", "ID01_03", "ID01_04")
 
 # Create composite scores
 cluster_data <- data.frame(
-  VS = rowMeans(data_ki[, vs_cols], na.rm = TRUE),
-  MN = rowMeans(data_ki[, mn_cols], na.rm = TRUE),
-  ID = rowMeans(data_ki[, id_cols], na.rm = TRUE),
-  EA = rowMeans(data_ki[, ea_cols], na.rm = TRUE)
+  VS = rowMeans(data_mensch[, vs_cols], na.rm = TRUE),
+  MN = rowMeans(data_mensch[, mn_cols], na.rm = TRUE),
+  ID = rowMeans(data_mensch[, id_cols], na.rm = TRUE),
+  EA = rowMeans(data_mensch[, ea_cols], na.rm = TRUE)
 )
 
 # Remove missing values
@@ -65,7 +65,7 @@ cluster_means$overall_mean <- (cluster_means$VS + cluster_means$MN +
 cluster_means_sorted <- cluster_means[order(cluster_means$overall_mean, decreasing = TRUE), ]
 
 # Assign names based on ranking
-cluster_means_sorted$cluster_name <- c("KI-Offen", "Ambivalent", "KI-Skeptisch")
+cluster_means_sorted$cluster_name <- c("Emotional Offen", "Ambivalent", "Emotional Distanziert")
 
 cat("✓ Clustering abgeschlossen\n")
 cat("Cluster-Verteilung:\n")
@@ -78,7 +78,7 @@ for(i in 1:nrow(cluster_means_sorted)) {
 # CREATE VISUALIZATION
 # =============================================================================
 
-cat("\n=== ERSTELLE KI CLUSTER VISUALISIERUNG ===\n")
+cat("\n=== ERSTELLE HUMAN CLUSTER VISUALISIERUNG ===\n")
 
 # Prepare data for plotting - match the exact structure from the reference diagram
 plot_data <- data.frame(
@@ -90,7 +90,7 @@ plot_data <- data.frame(
 )
 
 # Create the visualization matching the exact style
-ki_cluster_plot <- ggplot(plot_data, aes(x = Cluster, y = Value, fill = Variable)) +
+human_cluster_plot <- ggplot(plot_data, aes(x = Cluster, y = Value, fill = Variable)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7, 
            color = "black", linewidth = 0.3) +
   geom_text(aes(label = sprintf("%.1f", Value)), 
@@ -111,7 +111,7 @@ ki_cluster_plot <- ggplot(plot_data, aes(x = Cluster, y = Value, fill = Variable
   theme(
     axis.title = element_text(size = 12, family = "Times New Roman"),
     axis.text = element_text(size = 10, family = "Times New Roman"),
-    axis.text.x = element_text(angle = 0, family = "Times New Roman", vjust = 0, margin = margin(t = 0, b = 0)),
+    axis.text.x = element_text(angle = 0, family = "Times New Roman"),
     legend.title = element_text(size = 12, family = "Times New Roman"),
     legend.text = element_text(size = 10, family = "Times New Roman"),
     panel.grid.major = element_line(color = "gray90"),
@@ -132,23 +132,22 @@ ki_cluster_plot <- ggplot(plot_data, aes(x = Cluster, y = Value, fill = Variable
   ylim(0, 5) +
   scale_y_continuous(breaks = seq(0, 5, 1), limits = c(0, 5))
 
-# Save the visualization without outer border
+# Save the visualization
 dir.create("organized/images/clustering", recursive = TRUE, showWarnings = FALSE)
-ggsave("organized/images/clustering/ki_cluster_visualization.png", 
-       ki_cluster_plot, 
-       width = 10, height = 6, dpi = 300, bg = "white", 
+ggsave("organized/images/clustering/human_cluster_visualization.png", 
+       human_cluster_plot, width = 10, height = 6, dpi = 300, bg = "white", 
        limitsize = FALSE)
 
-cat("✓ ki_cluster_visualization.png erstellt\n")
+cat("✓ human_cluster_visualization.png erstellt\n")
 
 # =============================================================================
 # DATA SUMMARY
 # =============================================================================
 
 cat("\n================================================================================\n")
-cat("KI CLUSTER VISUALIZATION COMPLETED\n")
+cat("HUMAN CLUSTER VISUALIZATION COMPLETED\n")
 cat("================================================================================\n")
-cat("Generated file: organized/images/clustering/ki_cluster_visualization.png\n")
+cat("Generated file: organized/images/clustering/human_cluster_visualization.png\n")
 cat("\nCluster data summary:\n")
 print(cluster_means_sorted[, c("cluster_name", "n", "VS", "MN", "ID", "EA")])
 cat("\n================================================================================\n") 

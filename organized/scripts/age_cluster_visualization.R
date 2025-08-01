@@ -1,11 +1,12 @@
 # =============================================================================
-# KI CLUSTER VISUALIZATION
+# AGE CLUSTER VISUALIZATION
 # =============================================================================
-# Erstellt eine Visualisierung der KI-Cluster basierend auf den Daten
-# aus ki_specific_apa.png und cluster_prozent_tabelle.png
+# Erstellt eine Visualisierung der Altersgruppen nach Clustern
+# mit gleichen Farben und Style wie die anderen Visualisierungen
 
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 
 # =============================================================================
 # LOAD DATA
@@ -15,11 +16,10 @@ cat("Lade Daten...\n")
 data <- read.delim("organized/data/Bereinigte Daten von WhatsApp Business.csv", 
                    fileEncoding = "UTF-16LE", stringsAsFactors = FALSE)
 
-# Filter data (FINISHED=1 and AB01=1 for KI group)
+# Filter data (FINISHED=1)
 data_processed <- data %>% filter(FINISHED == 1)
-data_ki <- data_processed %>% filter(AB01 == 1)
 
-cat("✓ KI-Gruppe: n =", nrow(data_ki), "\n")
+cat("✓ Gesamte Stichprobe: n =", nrow(data_processed), "\n")
 
 # =============================================================================
 # PERFORM CLUSTERING
@@ -33,14 +33,15 @@ id_cols <- c("ID01_01", "ID01_02", "ID01_03", "ID01_04")
 
 # Create composite scores
 cluster_data <- data.frame(
-  VS = rowMeans(data_ki[, vs_cols], na.rm = TRUE),
-  MN = rowMeans(data_ki[, mn_cols], na.rm = TRUE),
-  ID = rowMeans(data_ki[, id_cols], na.rm = TRUE),
-  EA = rowMeans(data_ki[, ea_cols], na.rm = TRUE)
+  VS = rowMeans(data_processed[, vs_cols], na.rm = TRUE),
+  MN = rowMeans(data_processed[, mn_cols], na.rm = TRUE),
+  ID = rowMeans(data_processed[, id_cols], na.rm = TRUE),
+  EA = rowMeans(data_processed[, ea_cols], na.rm = TRUE)
 )
 
 # Remove missing values
 cluster_data_clean <- cluster_data[complete.cases(cluster_data), ]
+data_clean <- data_processed[complete.cases(cluster_data), ]
 
 # Perform k-means clustering
 set.seed(123)
@@ -65,7 +66,11 @@ cluster_means$overall_mean <- (cluster_means$VS + cluster_means$MN +
 cluster_means_sorted <- cluster_means[order(cluster_means$overall_mean, decreasing = TRUE), ]
 
 # Assign names based on ranking
-cluster_means_sorted$cluster_name <- c("KI-Offen", "Ambivalent", "KI-Skeptisch")
+cluster_means_sorted$cluster_name <- c("Offen", "Ambivalent", "Distanziert")
+
+# Add cluster information to data
+data_clean$Cluster <- clusters
+data_clean$Cluster_Name <- cluster_means_sorted$cluster_name[clusters]
 
 cat("✓ Clustering abgeschlossen\n")
 cat("Cluster-Verteilung:\n")
@@ -75,43 +80,63 @@ for(i in 1:nrow(cluster_means_sorted)) {
 }
 
 # =============================================================================
+# CREATE AGE GROUPS
+# =============================================================================
+
+cat("\n=== ERSTELLE ALTERSGRUPPEN ===\n")
+
+# Create age groups
+data_clean$Age_Group <- cut(data_clean$SO01, 
+                           breaks = c(17, 25, 35, 45, 55, 100),
+                           labels = c("18-25", "26-35", "36-45", "46-55", "56+"),
+                           include.lowest = TRUE)
+
+# Count persons by cluster and age group
+age_cluster_counts <- data_clean %>%
+  group_by(Cluster_Name, Age_Group) %>%
+  summarise(Count = n(), .groups = 'drop') %>%
+  filter(Age_Group %in% c("18-25", "26-35", "36-45", "46-55")) # Nur die gewünschten Altersgruppen
+
+cat("Altersgruppen-Verteilung:\n")
+print(age_cluster_counts)
+
+# Debug: Check data structure
+cat("\nDebug - SO01 Werte:\n")
+print(table(data_clean$SO01))
+cat("\nDebug - Age_Group Werte:\n")
+print(table(data_clean$Age_Group))
+cat("\nDebug - Cluster_Name Werte:\n")
+print(table(data_clean$Cluster_Name))
+
+# =============================================================================
 # CREATE VISUALIZATION
 # =============================================================================
 
-cat("\n=== ERSTELLE KI CLUSTER VISUALISIERUNG ===\n")
-
-# Prepare data for plotting - match the exact structure from the reference diagram
-plot_data <- data.frame(
-  Variable = rep(c("Vertrauen & Sympathie", "Menschlichkeit & Natürlichkeit", 
-                   "Identifikation", "Emotionale Ansprache"), each = 3),
-  Cluster = rep(cluster_means_sorted$cluster_name, 4),
-  Value = c(cluster_means_sorted$VS, cluster_means_sorted$MN, 
-            cluster_means_sorted$ID, cluster_means_sorted$EA)
-)
+cat("\n=== ERSTELLE ALTERSGRUPPEN-VISUALISIERUNG ===\n")
 
 # Create the visualization matching the exact style
-ki_cluster_plot <- ggplot(plot_data, aes(x = Cluster, y = Value, fill = Variable)) +
+age_cluster_plot <- ggplot(age_cluster_counts, aes(x = Cluster_Name, y = Count, fill = Age_Group)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7, 
            color = "black", linewidth = 0.3) +
-  geom_text(aes(label = sprintf("%.1f", Value)), 
+  geom_text(aes(label = Count), 
             position = position_dodge(width = 0.8), 
             vjust = -0.5, 
             size = 3, 
             family = "Times New Roman") +
   scale_fill_manual(values = c(
-    "Vertrauen & Sympathie" = "#F1C682",      # Exakte Farbe
-    "Menschlichkeit & Natürlichkeit" = "#BE4B5A",  # Exakte Farbe
-    "Identifikation" = "#ABCD9B",             # Exakte Farbe
-    "Emotionale Ansprache" = "#8DD3C8"        # Exakte Farbe
+    "18-25" = "#F1C682",      # Gelb/Orange
+    "26-35" = "#BE4B5A",      # Rot
+    "36-45" = "#ABCD9B",      # Hellgrün
+    "46-55" = "#8DD3C8"       # Hellblau/Türkis
   )) +
   labs(x = "Cluster",
-       y = "Mittelwert",
-       fill = "Variable") +
+       y = "Anzahl an Personen",
+       fill = "Altersgruppe") +
   theme_minimal() +
   theme(
     axis.title = element_text(size = 12, family = "Times New Roman"),
     axis.text = element_text(size = 10, family = "Times New Roman"),
-    axis.text.x = element_text(angle = 0, family = "Times New Roman", vjust = 0, margin = margin(t = 0, b = 0)),
+    axis.text.x = element_text(angle = 0, family = "Times New Roman"),
     legend.title = element_text(size = 12, family = "Times New Roman"),
     legend.text = element_text(size = 10, family = "Times New Roman"),
     panel.grid.major = element_line(color = "gray90"),
@@ -129,26 +154,28 @@ ki_cluster_plot <- ggplot(plot_data, aes(x = Cluster, y = Value, fill = Variable
     axis.ticks.x = element_line(),
     axis.ticks.length.x = unit(0, "pt")
   ) +
-  ylim(0, 5) +
-  scale_y_continuous(breaks = seq(0, 5, 1), limits = c(0, 5))
+  scale_x_discrete(labels = c("Offen" = "Offen",
+                             "Ambivalent" = "Ambivalent", 
+                             "Distanziert" = "Distanziert"))
 
-# Save the visualization without outer border
+# Save the visualization
 dir.create("organized/images/clustering", recursive = TRUE, showWarnings = FALSE)
-ggsave("organized/images/clustering/ki_cluster_visualization.png", 
-       ki_cluster_plot, 
-       width = 10, height = 6, dpi = 300, bg = "white", 
+ggsave("organized/images/clustering/age_cluster_visualization.png", 
+       age_cluster_plot, width = 10, height = 6, dpi = 300, bg = "white", 
        limitsize = FALSE)
 
-cat("✓ ki_cluster_visualization.png erstellt\n")
+cat("✓ age_cluster_visualization.png erstellt\n")
 
 # =============================================================================
 # DATA SUMMARY
 # =============================================================================
 
 cat("\n================================================================================\n")
-cat("KI CLUSTER VISUALIZATION COMPLETED\n")
+cat("AGE CLUSTER VISUALIZATION COMPLETED\n")
 cat("================================================================================\n")
-cat("Generated file: organized/images/clustering/ki_cluster_visualization.png\n")
+cat("Generated file: organized/images/clustering/age_cluster_visualization.png\n")
+cat("\nAltersgruppen nach Cluster:\n")
+print(age_cluster_counts)
 cat("\nCluster data summary:\n")
 print(cluster_means_sorted[, c("cluster_name", "n", "VS", "MN", "ID", "EA")])
 cat("\n================================================================================\n") 
