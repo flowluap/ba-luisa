@@ -1,5 +1,10 @@
 # WICHTIGE LERNINGS & REGELN
 
+### **SCHRIFTART-REGEL:**
+- **IMMER Times New Roman** für alle Textelemente in Visualisierungen verwenden
+- **Konsistente Typografie** für professionelle Darstellung
+- **Parameter**: `family = "Times New Roman"` in allen ggplot2-Elementen
+
 ## Datenquellen & Filter:
 - AB01 1=KI 2=Mensch
 - Immer Bereinigte Daten von WhatsApp Business.csv nutzen
@@ -65,7 +70,7 @@
 - **Dokumentation**: Alle Parameter und Entscheidungen transparent dokumentieren
 
 ## DIAGRAMM-GENERIERUNG LEARNINGS:
-- **Schriftart**: Times New Roman für alle Textelemente (`family = "Times New Roman"`)
+- **Schriftart**: **IMMER Times New Roman** für alle Textelemente (`family = "Times New Roman"`)
 - **Titel entfernen**: Für saubere Visualisierungen ohne Titel (`labs()` ohne `title`)
 - **Exakte Farben**: Spezifische Hex-Codes verwenden, nicht Standard-Farben
   - Emotionale Ansprache: `#8DD3C8` (Hellblau/Türkis)
@@ -101,7 +106,7 @@
   - **Positionierung**: `position = position_dodge(width = 0.8)` über den Balken
   - **Abstand**: `vjust = -0.5` für optimalen Abstand über Balken
   - **Schriftgröße**: `size = 3` für angemessene Lesbarkeit
-  - **Schriftart**: `family = "Times New Roman"` für Konsistenz 
+  - **Schriftart**: **IMMER `family = "Times New Roman"`** für Konsistenz 
 
 
 

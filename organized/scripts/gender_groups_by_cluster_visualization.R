@@ -1,8 +1,8 @@
 # =============================================================================
-# AGE GROUPS BY CLUSTER VISUALIZATION
+# GENDER GROUPS BY CLUSTER VISUALIZATION
 # =============================================================================
-# Erstellt Visualisierungen der Altersgruppen für KI-Gruppe und Mensch-Gruppe
-# getrennt, mit den gleichen Clustern wie in ki_specific_apa.png und human_specific_apa.png
+# Erstellt Visualisierungen der Geschlechtergruppen für KI-Gruppe und Mensch-Gruppe
+# getrennt, mit anderen Farben als üblich, aber gleichem Style
 
 library(dplyr)
 library(ggplot2)
@@ -139,53 +139,42 @@ for(i in 1:nrow(cluster_means_mensch_sorted)) {
 }
 
 # =============================================================================
-# CREATE AGE GROUPS
+# CREATE GENDER GROUPS
 # =============================================================================
 
-cat("\n=== ERSTELLE ALTERSGRUPPEN ===\n")
+cat("\n=== ERSTELLE GESCHLECHTERGRUPPEN ===\n")
 
-# Create age groups for KI
-data_ki_clean$Age_Group <- cut(data_ki_clean$SO01, 
-                              breaks = c(17, 25, 35, 45, 55, 100),
-                              labels = c("18-25", "26-35", "36-45", "46-55", "56+"),
-                              include.lowest = TRUE)
+# Create gender groups for KI
+data_ki_clean$Gender_Group <- ifelse(data_ki_clean$SO02 == 1, "Männlich", "Weiblich")
 
-# Create age groups for Mensch
-data_mensch_clean$Age_Group <- cut(data_mensch_clean$SO01, 
-                                  breaks = c(17, 25, 35, 45, 55, 100),
-                                  labels = c("18-25", "26-35", "36-45", "46-55", "56+"),
-                                  include.lowest = TRUE)
+# Create gender groups for Mensch
+data_mensch_clean$Gender_Group <- ifelse(data_mensch_clean$SO02 == 1, "Männlich", "Weiblich")
 
-# Count persons by cluster and age group for KI
-age_cluster_counts_ki <- data_ki_clean %>%
-  group_by(Cluster_Name, Age_Group) %>%
+# Count persons by cluster and gender group for KI
+gender_cluster_counts_ki <- data_ki_clean %>%
+  group_by(Cluster_Name, Gender_Group) %>%
   summarise(Count = n(), .groups = 'drop') %>%
-  filter(Age_Group %in% c("18-25", "26-35", "36-45", "46-55")) %>%
   mutate(Group = "KI")
 
-# Count persons by cluster and age group for Mensch
-age_cluster_counts_mensch <- data_mensch_clean %>%
-  group_by(Cluster_Name, Age_Group) %>%
+# Count persons by cluster and gender group for Mensch
+gender_cluster_counts_mensch <- data_mensch_clean %>%
+  group_by(Cluster_Name, Gender_Group) %>%
   summarise(Count = n(), .groups = 'drop') %>%
-  filter(Age_Group %in% c("18-25", "26-35", "36-45", "46-55")) %>%
   mutate(Group = "Mensch")
 
-# Combine both groups
-age_cluster_counts_combined <- rbind(age_cluster_counts_ki, age_cluster_counts_mensch)
-
-cat("Altersgruppen-Verteilung KI:\n")
-print(age_cluster_counts_ki)
-cat("\nAltersgruppen-Verteilung Mensch:\n")
-print(age_cluster_counts_mensch)
+cat("Geschlechtergruppen-Verteilung KI:\n")
+print(gender_cluster_counts_ki)
+cat("\nGeschlechtergruppen-Verteilung Mensch:\n")
+print(gender_cluster_counts_mensch)
 
 # =============================================================================
 # CREATE VISUALIZATIONS
 # =============================================================================
 
-cat("\n=== ERSTELLE ALTERSGRUPPEN-VISUALISIERUNGEN ===\n")
+cat("\n=== ERSTELLE GESCHLECHTERGRUPPEN-VISUALISIERUNGEN ===\n")
 
-# Create the KI group visualization
-ki_age_plot <- ggplot(age_cluster_counts_ki, aes(x = Cluster_Name, y = Count, fill = Age_Group)) +
+# Create the KI group visualization with different colors
+ki_gender_plot <- ggplot(gender_cluster_counts_ki, aes(x = Cluster_Name, y = Count, fill = Gender_Group)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7, 
            color = "black", linewidth = 0.3) +
   geom_text(aes(label = Count), 
@@ -194,14 +183,12 @@ ki_age_plot <- ggplot(age_cluster_counts_ki, aes(x = Cluster_Name, y = Count, fi
             size = 3, 
             family = "Times New Roman") +
   scale_fill_manual(values = c(
-    "18-25" = "#F1C682",      # Gelb/Orange
-    "26-35" = "#BE4B5A",      # Rot
-    "36-45" = "#ABCD9B",      # Hellgrün
-    "46-55" = "#8DD3C8"       # Hellblau/Türkis
+    "Männlich" = "#98D8C8",      # Gedecktes Pastell-Grün
+    "Weiblich" = "#B19CD9"       # Gedecktes Pastell-Lila
   )) +
   labs(x = "Cluster",
        y = "Anzahl an Personen",
-       fill = "Altersgruppe",
+       fill = "Geschlecht",
        title = "KI-Gruppe") +
   theme_minimal() +
   theme(
@@ -226,10 +213,10 @@ ki_age_plot <- ggplot(age_cluster_counts_ki, aes(x = Cluster_Name, y = Count, fi
     axis.ticks.length.x = unit(0, "pt"),
     plot.title = element_text(size = 14, family = "Times New Roman", hjust = 0.5)
   ) +
-  ylim(0, max(age_cluster_counts_ki$Count) * 1.2)
+  ylim(0, max(gender_cluster_counts_ki$Count) * 1.2)
 
-# Create the Mensch group visualization
-mensch_age_plot <- ggplot(age_cluster_counts_mensch, aes(x = Cluster_Name, y = Count, fill = Age_Group)) +
+# Create the Mensch group visualization with different colors
+mensch_gender_plot <- ggplot(gender_cluster_counts_mensch, aes(x = Cluster_Name, y = Count, fill = Gender_Group)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7, 
            color = "black", linewidth = 0.3) +
   geom_text(aes(label = Count), 
@@ -238,14 +225,12 @@ mensch_age_plot <- ggplot(age_cluster_counts_mensch, aes(x = Cluster_Name, y = C
             size = 3, 
             family = "Times New Roman") +
   scale_fill_manual(values = c(
-    "18-25" = "#F1C682",      # Gelb/Orange
-    "26-35" = "#BE4B5A",      # Rot
-    "36-45" = "#ABCD9B",      # Hellgrün
-    "46-55" = "#8DD3C8"       # Hellblau/Türkis
+    "Männlich" = "#98D8C8",      # Gedecktes Pastell-Grün
+    "Weiblich" = "#B19CD9"       # Gedecktes Pastell-Lila
   )) +
   labs(x = "Cluster",
        y = "Anzahl an Personen",
-       fill = "Altersgruppe",
+       fill = "Geschlecht",
        title = "Mensch-Gruppe") +
   theme_minimal() +
   theme(
@@ -270,47 +255,46 @@ mensch_age_plot <- ggplot(age_cluster_counts_mensch, aes(x = Cluster_Name, y = C
     axis.ticks.length.x = unit(0, "pt"),
     plot.title = element_text(size = 14, family = "Times New Roman", hjust = 0.5)
   ) +
-  ylim(0, max(age_cluster_counts_mensch$Count) * 1.2)
+  ylim(0, max(gender_cluster_counts_mensch$Count) * 1.2)
 
 # Save the visualizations
 dir.create("organized/images/clustering", recursive = TRUE, showWarnings = FALSE)
 
-ggsave("organized/images/clustering/ki_age_groups_visualization.png", 
-       ki_age_plot, width = 10, height = 6, dpi = 300, bg = "white", 
+ggsave("organized/images/clustering/ki_gender_groups_visualization.png", 
+       ki_gender_plot, width = 10, height = 6, dpi = 300, bg = "white", 
        limitsize = FALSE)
 
-ggsave("organized/images/clustering/mensch_age_groups_visualization.png", 
-       mensch_age_plot, width = 10, height = 6, dpi = 300, bg = "white", 
+ggsave("organized/images/clustering/human_gender_groups_visualization.png", 
+       mensch_gender_plot, width = 10, height = 6, dpi = 300, bg = "white", 
        limitsize = FALSE)
 
-# Also create English version
-ggsave("organized/images/clustering/human_age_groups_visualization.png", 
-       mensch_age_plot, width = 10, height = 6, dpi = 300, bg = "white", 
-       limitsize = FALSE)
-
-cat("✓ ki_age_groups_visualization.png erstellt\n")
-cat("✓ mensch_age_groups_visualization.png erstellt\n")
-cat("✓ human_age_groups_visualization.png erstellt\n")
+cat("✓ ki_gender_groups_visualization.png erstellt\n")
+cat("✓ human_gender_groups_visualization.png erstellt\n")
 
 # =============================================================================
 # DATA SUMMARY
 # =============================================================================
 
 cat("\n================================================================================\n")
-cat("AGE GROUPS BY CLUSTER VISUALIZATION COMPLETED\n")
+cat("GENDER GROUPS BY CLUSTER VISUALIZATION COMPLETED\n")
 cat("================================================================================\n")
 cat("Generated files:\n")
-cat("- organized/images/clustering/ki_age_groups_visualization.png\n")
-cat("- organized/images/clustering/mensch_age_groups_visualization.png\n")
+cat("- organized/images/clustering/ki_gender_groups_visualization.png\n")
+cat("- organized/images/clustering/human_gender_groups_visualization.png\n")
 
-cat("\nKI-Gruppe Altersgruppen nach Cluster:\n")
-print(age_cluster_counts_ki)
-cat("\nMensch-Gruppe Altersgruppen nach Cluster:\n")
-print(age_cluster_counts_mensch)
+cat("\nKI-Gruppe Geschlechtergruppen nach Cluster:\n")
+print(gender_cluster_counts_ki)
+cat("\nMensch-Gruppe Geschlechtergruppen nach Cluster:\n")
+print(gender_cluster_counts_mensch)
 
 cat("\nKI-Gruppe Cluster-Zusammenfassung:\n")
 print(cluster_means_ki_sorted[, c("cluster_name", "n", "VS", "MN", "ID", "EA")])
 cat("\nMensch-Gruppe Cluster-Zusammenfassung:\n")
 print(cluster_means_mensch_sorted[, c("cluster_name", "n", "VS", "MN", "ID", "EA")])
+
+cat("\n=== FARBEN VERWENDET ===\n")
+cat("Männlich: #98D8C8 (Gedecktes Pastell-Grün)\n")
+cat("Weiblich: #B19CD9 (Gedecktes Pastell-Lila)\n")
+cat("(Andere Farben als üblich, aber gleicher Style)\n")
 
 cat("\n================================================================================\n") 
