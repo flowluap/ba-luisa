@@ -62,7 +62,21 @@
 - **Effektstärken**: η² (Eta-squared) für praktische Bedeutsamkeit
 - **Reproduzierbarkeit**: set.seed() für konsistente Ergebnisse
 - **Standardisierung**: Z-Score-Standardisierung vor Clustering
-- **Dokumentation**: Alle Parameter und Entscheidungen transparent dokumentieren 
+- **Dokumentation**: Alle Parameter und Entscheidungen transparent dokumentieren
+
+## DIAGRAMM-GENERIERUNG LEARNINGS:
+- **Schriftart**: Times New Roman für alle Textelemente (`family = "Times New Roman"`)
+- **Titel entfernen**: Für saubere Visualisierungen ohne Titel (`labs()` ohne `title`)
+- **Exakte Farben**: Spezifische Hex-Codes verwenden, nicht Standard-Farben
+  - Emotionale Ansprache: `#8DD3C8` (Hellblau/Türkis)
+  - Identifikation: `#ABCD9B` (Hellgrün)
+  - Menschlichkeit & Natürlichkeit: `#BE4B5A` (Rot)
+  - Vertrauen & Sympathie: `#F1C682` (Gelb/Orange)
+- **Balken-Style**: Schwarze Umrandung (`color = "black", linewidth = 0.3`)
+- **Hintergrund**: Weißer Hintergrund (`panel.background = element_rect(fill = "white")`)
+- **Gitternetz**: Graue horizontale Linien (`panel.grid.major = element_line(color = "gray90")`)
+- **Y-Achse**: 0-5 Skala mit ganzen Zahlen (`ylim(0, 5)`)
+- **Gruppierung**: Dodge-Positionierung für gruppierte Balken (`position_dodge(width = 0.8)`) 
 
 
 
@@ -80,13 +94,12 @@
 | **Tabelle** | `ki_specific_apa.png` | KI-spezifische Cluster-Analyse | `organized/images/clustering/` |
 | **Tabelle** | `human_specific_apa.png` | Mensch-spezifische Cluster-Analyse | `organized/images/clustering/` |
 | **Tabelle** | `cluster_prozent_tabelle.png` | Cluster-Prozent-Verteilung | `organized/images/clustering/` |
-| **Diagramm** | `cluster_mittelwerte_ki_style.png` | Cluster-Mittelwerte Visualisierung | `organized/images/clustering/` |
 
 ## Vorteile des Master-Scripts:
 - ✅ **Einheitliche Logik**: Alle Analysen verwenden identische Clustering-Parameter
 - ✅ **Konsistente Cluster-Namen**: Logische Zuordnung basierend auf tatsächlichen Werten
 - ✅ **Minimaler Abstand**: Optimierte Header-Zeilen mit 0.1mm Padding
-- ✅ **Einmalige Ausführung**: Alle vier Elemente in einem Durchlauf
+- ✅ **Einmalige Ausführung**: Alle drei Elemente in einem Durchlauf
 - ✅ **Datenquelle**: Verwendet "Bereinigte Daten von WhatsApp Business.csv"  
 
 

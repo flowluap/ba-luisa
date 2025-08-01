@@ -5,7 +5,6 @@
 # 1. ki_specific_apa.png
 # 2. human_specific_apa.png  
 # 3. cluster_prozent_tabelle.png
-# 4. cluster_mittelwerte_ki_style.png
 
 library(dplyr)
 library(gridExtra)
@@ -37,7 +36,7 @@ create_apa_table <- function(table_data, title) {
       colhead = list(
         fg_params = list(fontface = "bold", hjust = 0, x = 0.1),
         bg_params = list(fill = NA),
-        padding = unit(c(0.1, 1), "mm")
+        padding = unit(c(3, 1), "mm")
       ),
       rowhead = list(
         fg_params = list(hjust = 0, x = 0.1),
@@ -60,8 +59,8 @@ create_apa_table <- function(table_data, title) {
     t = 1, b = 1, l = 1, r = ncol(table_data)
   )
   
-  # Adjust header height
-  table_grob$heights[1] <- unit(1.5, "mm")
+  # Adjust header height - make it taller to prevent cutting off
+  table_grob$heights[1] <- unit(8, "mm")
   
   # Add bottom border
   table_grob <- gtable_add_grob(
@@ -176,9 +175,15 @@ ki_apa_table <- create_apa_table(ki_table_data, "KI-Specific Cluster Analysis")
 # Create directory and save
 dir.create("organized/images/clustering", recursive = TRUE, showWarnings = FALSE)
 png("organized/images/clustering/ki_specific_apa.png", 
-    width = 1200, height = 300, res = 300, bg = "white")
+    width = 1600, height = 300, res = 300, bg = "white")
 grid.newpage()
+
+# Create viewport with more space at top
+vp <- viewport(x = 0.5, y = 0.4, width = 0.98, height = 0.7, just = c("center", "center"))
+pushViewport(vp)
 grid.draw(ki_apa_table)
+popViewport()
+
 dev.off()
 
 cat("✓ ki_specific_apa.png erstellt\n")
@@ -206,9 +211,15 @@ mensch_apa_table <- create_apa_table(mensch_table_data, "Human-Specific Cluster 
 
 # Save
 png("organized/images/clustering/human_specific_apa.png", 
-    width = 1200, height = 300, res = 300, bg = "white")
+    width = 1600, height = 300, res = 300, bg = "white")
 grid.newpage()
+
+# Create viewport with more space at top
+vp <- viewport(x = 0.5, y = 0.4, width = 0.98, height = 0.7, just = c("center", "center"))
+pushViewport(vp)
 grid.draw(mensch_apa_table)
+popViewport()
+
 dev.off()
 
 cat("✓ human_specific_apa.png erstellt\n")
@@ -269,8 +280,8 @@ cluster_apa_grob <- gtable_add_grob(
   t = 1, b = 1, l = 1, r = ncol(results)
 )
 
-# Adjust header height
-cluster_apa_grob$heights[1] <- unit(1.5, "mm")
+# Adjust header height - make it taller to prevent cutting off
+cluster_apa_grob$heights[1] <- unit(8, "mm")
 
 # Add bottom border
 cluster_apa_grob <- gtable_add_grob(
@@ -287,53 +298,17 @@ cluster_apa_grob <- gtable_add_grob(
 
 # Save
 png("organized/images/clustering/cluster_prozent_tabelle.png", 
-    width = 1200, height = 200, res = 300, bg = "white")
+    width = 1200, height = 400, res = 300, bg = "white")
 grid.newpage()
+
+# Draw table directly without viewport - this should fix z-index issues
 grid.draw(cluster_apa_grob)
+
 dev.off()
 
 cat("✓ cluster_prozent_tabelle.png erstellt\n")
 
-# =============================================================================
-# 4. GENERATE CLUSTER MITTELWERTE KI-STYLE DIAGRAM
-# =============================================================================
 
-cat("\n=== 4. GENERATE CLUSTER MITTELWERTE KI-STYLE DIAGRAM ===\n")
-
-# Prepare data for plotting
-plot_data <- data.frame(
-  Variable = rep(c("VS", "MN", "ID", "EA"), each = 3),
-  Cluster = rep(ki_result$cluster_means$cluster_name, 4),
-  Value = c(ki_result$cluster_means$VS, ki_result$cluster_means$MN, 
-            ki_result$cluster_means$ID, ki_result$cluster_means$EA)
-)
-
-# Create KI-style plot
-ki_style_plot <- ggplot(plot_data, aes(x = Variable, y = Value, fill = Cluster)) +
-  geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
-  scale_fill_manual(values = c("KI-Offen" = "#4CAF50", "Ambivalent" = "#FF9800", "KI-Skeptisch" = "#F44336")) +
-  labs(title = "Cluster-Mittelwerte (KI-Gruppe)",
-       x = "Variable",
-       y = "Mittelwert",
-       fill = "Cluster") +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
-    axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10),
-    legend.title = element_text(size = 12),
-    legend.text = element_text(size = 10),
-    panel.grid.major = element_line(color = "gray90"),
-    panel.grid.minor = element_blank()
-  ) +
-  ylim(0, max(plot_data$Value) * 1.1)
-
-# Save
-dir.create("organized/images/clustering", recursive = TRUE, showWarnings = FALSE)
-ggsave("organized/images/clustering/cluster_mittelwerte_ki_style.png", 
-       ki_style_plot, width = 10, height = 6, dpi = 300)
-
-cat("✓ cluster_mittelwerte_ki_style.png erstellt\n")
 
 # =============================================================================
 # SUMMARY
@@ -346,7 +321,6 @@ cat("Generated files:\n")
 cat("1. organized/images/clustering/ki_specific_apa.png\n")
 cat("2. organized/images/clustering/human_specific_apa.png\n")
 cat("3. organized/images/clustering/cluster_prozent_tabelle.png\n")
-cat("4. organized/images/clustering/cluster_mittelwerte_ki_style.png\n")
 cat("\nData summary:\n")
 cat("• KI-Gruppe: N =", nrow(data_ki), "\n")
 cat("• Mensch-Gruppe: N =", nrow(data_mensch), "\n")
