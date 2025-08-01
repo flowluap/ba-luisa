@@ -188,7 +188,7 @@ create_apa_table <- function(table_data, left_align = FALSE) {
       y0 = unit(0, "npc"),
       x1 = unit(1, "npc"),
       y1 = unit(0, "npc"),
-      gp = gpar(lwd = 3, col = "black")
+      gp = gpar(lwd = 2, col = "black")
     ),
     t = nrow(table_data) + 1, b = nrow(table_data) + 1, l = 1, r = ncol(table_data)
   )

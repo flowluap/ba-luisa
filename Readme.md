@@ -93,6 +93,8 @@
 - **Viewport-Probleme**: Viewport kann Z-Index Probleme verursachen - bei Problemen entfernen
 - **Z-Index**: Direktes Rendering ohne Viewport vermeidet Layering-Probleme
 - **Balken-Umrandung**: Schwarze Umrandung der Balken beibehalten (`color = "black", linewidth = 0.3`)
+- **Rahmen-Linien**: Konsistente Linien-Dicke für alle Rahmen (`lwd = 2` für obere und untere Linien)
+- **Linien-Konsistenz**: Obere und untere Rahmen müssen identische Dicke haben (`lwd = 2`)
 
 ## CLUSTER-VISUALISIERUNG LEARNINGS:
 - **Datenbasierte Visualisierung**: Exakte Werte aus `ki_specific_apa.png` und `cluster_prozent_tabelle.png` verwenden
