@@ -1,0 +1,1136 @@
+{
+  "experiment_parameters": {
+    "description": "Parameter für die Generierung von realistischen Datensätzen basierend auf Hypothesen",
+    "sample_size_human": 67,
+    "sample_size_ai": 64,
+    "standard_deviation": 1.0,
+    "skipped_cases":14,
+    "note": "Sie können für jede Variable individuelle Mittelwerte definieren"
+  },
+  "page_mappings": {
+    "1": ["CASE", "QUESTNNR", "MODE", "STARTED"],
+    "2": ["BV02"],
+    "3": ["AB01_CP", "AB01"],
+    "4": ["MC01"],
+    "5": ["MN01_01", "MN01_02", "MN01_03", "MN01_04", "MN01_05", "MN01_06", "MN01_07"],
+    "6": ["VS01_01", "VS01_02", "VS01_03", "VS01_04", "VS01_05", "VS01_06", "VS01_07", "VS01_08"],
+    "7": ["EA01_01", "EA01_02", "EA01_03", "EA01_04", "EA01_05", "ID01_01", "ID01_02", "ID01_03", "ID01_04"],
+    "8": ["KI01_01", "KI01_02", "KI01_03", "KI01_04", "KI02_01", "KI02_02", "KI02_03", "KI02_04", "KI02_05", "KI02_06", "KI02_07", "KI02_08", "KI03_01"],
+    "9": ["SE01_01", "SE01_02", "SE01_03", "SE01_05", "SE01_06", "SE02_01", "SE03", "SE03_01", "SE03_02", "SE03_03", "SE03_04", "SE03_05", "SE03_06", "SE03_07", "SE04_01"],
+    "10": ["SO01_01", "SO02"]
+  },
+  "variables": {
+    "MC01": {
+      "scale": "MC",
+      "target_cohens_d": 1.20,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 4,
+      "description": "Manipulationscheck - eindeutig menschlich",
+      "cronbachs_alpha": 0.85,
+      "p_value": 0.01,
+      "pearson": 0.65,
+      "wilks_lambda": 0.20,
+      "items": {
+        "MC01": {
+          "name": "Diese Influencerin war... eindeutig menschlich",
+          "mean_human": 4.5,
+          "mean_ai": 1.5
+        }
+      }
+    },
+    "MC02": {
+      "scale": "MC",
+      "target_cohens_d": 0.80,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 4,
+      "description": "Manipulationscheck - eher menschlich",
+      "cronbachs_alpha": 0.85,
+      "p_value": 0.01,
+      "pearson": 0.65,
+      "wilks_lambda": 0.20,
+      "items": {
+        "MC02": {
+          "name": "Diese Influencerin war... eher menschlich",
+          "mean_human": 3.8,
+          "mean_ai": 2.2
+        }
+      }
+    },
+    "MC03": {
+      "scale": "MC",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 4,
+      "description": "Manipulationscheck - unentschieden",
+      "cronbachs_alpha": 0.85,
+      "p_value": 0.01,
+      "pearson": 0.65,
+      "wilks_lambda": 0.20,
+      "items": {
+        "MC03": {
+          "name": "Diese Influencerin war... unentschieden",
+          "mean_human": 3.0,
+          "mean_ai": 3.0
+        }
+      }
+    },
+    "MC04": {
+      "scale": "MC",
+      "target_cohens_d": -0.80,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 4,
+      "description": "Manipulationscheck - eher ein KI-Avatar",
+      "cronbachs_alpha": 0.85,
+      "p_value": 0.01,
+      "pearson": 0.65,
+      "wilks_lambda": 0.20,
+      "items": {
+        "MC04": {
+          "name": "Diese Influencerin war... eher ein KI-Avatar",
+          "mean_human": 2.2,
+          "mean_ai": 3.8
+        }
+      }
+    },
+    "MC05": {
+      "scale": "MC",
+      "target_cohens_d": -1.20,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 4,
+      "description": "Manipulationscheck - eindeutig ein KI-Avatar",
+      "cronbachs_alpha": 0.85,
+      "p_value": 0.01,
+      "pearson": 0.65,
+      "wilks_lambda": 0.20,
+      "items": {
+        "MC05": {
+          "name": "Diese Influencerin war... eindeutig ein KI-Avatar",
+          "mean_human": 1.5,
+          "mean_ai": 4.5
+        }
+      }
+    },
+    "MN01": {
+      "scale": "MN",
+      "target_cohens_d": -3.5,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 5,
+      "description": "Die Person im Video wirkt auf mich menschlich und lebendig",
+      "cronbachs_alpha": 0.91,
+      "p_value": 0.001,
+      "pearson": 0.68,
+      "wilks_lambda": 0.28,
+      "items": {
+        "MN01": {
+          "name": "Die Person im Video wirkt auf mich menschlich und lebendig",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "MN02": {
+      "scale": "MN",
+      "target_cohens_d": -3.5,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 5,
+      "description": "Ich hatte das Gefühl, dass echte Emotionen vermittelt wurden",
+      "cronbachs_alpha": 0.91,
+      "p_value": 0.001,
+      "pearson": 0.68,
+      "wilks_lambda": 0.28,
+      "items": {
+        "MN02": {
+          "name": "Ich hatte das Gefühl, dass echte Emotionen vermittelt wurden",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "MN03": {
+      "scale": "MN",
+      "target_cohens_d": 3.5,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 5,
+      "description": "Die Person wirkt inszeniert oder künstlich (reverse coded)",
+      "cronbachs_alpha": 0.91,
+      "p_value": 0.001,
+      "pearson": 0.68,
+      "wilks_lambda": 0.28,
+      "items": {
+        "MN03": {
+          "name": "Die Person wirkt inszeniert oder künstlich",
+          "mean_human": 1.05,
+          "mean_ai": 4.95
+        }
+      }
+    },
+    "MN04": {
+      "scale": "MN",
+      "target_cohens_d": -3.5,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 5,
+      "description": "Die Körpersprache wirkte natürlich und glaubwürdig",
+      "cronbachs_alpha": 0.91,
+      "p_value": 0.001,
+      "pearson": 0.68,
+      "wilks_lambda": 0.28,
+      "items": {
+        "MN04": {
+          "name": "Die Körpersprache wirkte natürlich und glaubwürdig",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "MN05": {
+      "scale": "MN",
+      "target_cohens_d": -3.5,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 5,
+      "description": "Die Mimik und Gestik passten zur vermittelten Botschaft",
+      "cronbachs_alpha": 0.91,
+      "p_value": 0.001,
+      "pearson": 0.68,
+      "wilks_lambda": 0.28,
+      "items": {
+        "MN05": {
+          "name": "Die Mimik und Gestik passten zur vermittelten Botschaft",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "MN06": {
+      "scale": "MN",
+      "target_cohens_d": -3.5,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 5,
+      "description": "Die Person wirkte echt und unverstellt",
+      "cronbachs_alpha": 0.91,
+      "p_value": 0.001,
+      "pearson": 0.68,
+      "wilks_lambda": 0.28,
+      "items": {
+        "MN06": {
+          "name": "Die Person wirkte echt und unverstellt",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "MN07": {
+      "scale": "MN",
+      "target_cohens_d": -3.5,
+      "hypothesis": "H1",
+      "scale_range": [1, 5],
+      "page": 5,
+      "description": "Die Reaktionen der Person wirkten spontan, nicht gespielt",
+      "cronbachs_alpha": 0.91,
+      "p_value": 0.001,
+      "pearson": 0.68,
+      "wilks_lambda": 0.28,
+      "items": {
+        "MN07": {
+          "name": "Die Reaktionen der Person wirkten spontan, nicht gespielt",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "VS01": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie vertrauenswürdig erscheint Ihnen diese Influencerin?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS01": {
+          "name": "Wie vertrauenswürdig erscheint Ihnen diese Influencerin?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "VS02": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie sympathisch wirkt die Influencerin auf Sie?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS02": {
+          "name": "Wie sympathisch wirkt die Influencerin auf Sie?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "VS03": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie authentisch empfinden Sie diese Influencerin?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS03": {
+          "name": "Wie authentisch empfinden Sie diese Influencerin?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "VS04": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie kompetent wirkt die Influencerin in Bezug auf das Thema?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS04": {
+          "name": "Wie kompetent wirkt die Influencerin in Bezug auf das Thema?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "VS05": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie nahbar wirkt die Influencerin auf Sie?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS05": {
+          "name": "Wie nahbar wirkt die Influencerin auf Sie?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "VS06": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie aufmerksam und zugewandt wirkt die Influencerin?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS06": {
+          "name": "Wie aufmerksam und zugewandt wirkt die Influencerin?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "VS07": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie ehrlich wirkte die Person in ihren Aussagen?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS07": {
+          "name": "Wie ehrlich wirkte die Person in ihren Aussagen?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "VS08": {
+      "scale": "VS",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 6,
+      "description": "Wie gerne haben Sie der Person zugehört?",
+      "cronbachs_alpha": 0.88,
+      "p_value": 0.00001,
+      "pearson": 0.74,
+      "wilks_lambda": 0.42,
+      "items": {
+        "VS08": {
+          "name": "Wie gerne haben Sie der Person zugehört?",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "EA01": {
+      "scale": "EA",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Das Video hat mich emotional angesprochen",
+      "cronbachs_alpha": 0.82,
+      "p_value": 0.001,
+      "pearson": 0.58,
+      "wilks_lambda": 0.65,
+      "items": {
+        "EA01": {
+          "name": "Das Video hat mich emotional angesprochen",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "EA02": {
+      "scale": "EA",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Das Video hat positive Emotionen wie Freude, Interesse oder Mitgefühl ausgelöst",
+      "cronbachs_alpha": 0.82,
+      "p_value": 0.001,
+      "pearson": 0.58,
+      "wilks_lambda": 0.65,
+      "items": {
+        "EA02": {
+          "name": "Das Video hat positive Emotionen wie Freude, Interesse oder Mitgefühl ausgelöst",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "EA03": {
+      "scale": "EA",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Das Video hat mich berührt oder zum Nachdenken gebracht",
+      "cronbachs_alpha": 0.82,
+      "p_value": 0.001,
+      "pearson": 0.58,
+      "wilks_lambda": 0.65,
+      "items": {
+        "EA03": {
+          "name": "Das Video hat mich berührt oder zum Nachdenken gebracht",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "EA04": {
+      "scale": "EA",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Ich habe mich beim Ansehen des Videos wohlgefühlt",
+      "cronbachs_alpha": 0.82,
+      "p_value": 0.001,
+      "pearson": 0.58,
+      "wilks_lambda": 0.65,
+      "items": {
+        "EA04": {
+          "name": "Ich habe mich beim Ansehen des Videos wohlgefühlt",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "EA05": {
+      "scale": "EA",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Das Video hat meine Aufmerksamkeit stark gefesselt",
+      "cronbachs_alpha": 0.82,
+      "p_value": 0.001,
+      "pearson": 0.58,
+      "wilks_lambda": 0.65,
+      "items": {
+        "EA05": {
+          "name": "Das Video hat meine Aufmerksamkeit stark gefesselt",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "ID01": {
+      "scale": "ID",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Ich konnte mich mit der Person im Video identifizieren",
+      "cronbachs_alpha": 0.84,
+      "p_value": 0.00001,
+      "pearson": 0.62,
+      "wilks_lambda": 0.58,
+      "items": {
+        "ID01": {
+          "name": "Ich konnte mich mit der Person im Video identifizieren",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "ID02": {
+      "scale": "ID",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Die Gedanken und Gefühle der Person waren mir nachvollziehbar",
+      "cronbachs_alpha": 0.84,
+      "p_value": 0.00001,
+      "pearson": 0.62,
+      "wilks_lambda": 0.58,
+      "items": {
+        "ID02": {
+          "name": "Die Gedanken und Gefühle der Person waren mir nachvollziehbar",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "ID03": {
+      "scale": "ID",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Ich konnte mit der Person im Video mitfühlen",
+      "cronbachs_alpha": 0.84,
+      "p_value": 0.00001,
+      "pearson": 0.62,
+      "wilks_lambda": 0.58,
+      "items": {
+        "ID03": {
+          "name": "Ich konnte mit der Person im Video mitfühlen",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "ID04": {
+      "scale": "ID",
+      "target_cohens_d": -5.0,
+      "hypothesis": "H3",
+      "scale_range": [1, 5],
+      "page": 7,
+      "description": "Ich hatte das Gefühl, die Person im Video zu kennen",
+      "cronbachs_alpha": 0.84,
+      "p_value": 0.00001,
+      "pearson": 0.62,
+      "wilks_lambda": 0.58,
+      "items": {
+        "ID04": {
+          "name": "Ich hatte das Gefühl, die Person im Video zu kennen",
+          "mean_human": 4.99,
+          "mean_ai": 1.01
+        }
+      }
+    },
+    "KI01_01": {
+      "scale": "KI01",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Ich traue KI-Avataren Meinungen und Empfehlungen genauso zu wie Menschen",
+      "cronbachs_alpha": 0.76,
+      "p_value": 0.001,
+      "pearson": 0.48,
+      "wilks_lambda": 0.72,
+      "items": {
+        "KI01_01": {
+          "name": "Ich traue KI-Avataren Meinungen und Empfehlungen genauso zu wie Menschen",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "KI01_02": {
+      "scale": "KI01",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Ich halte KI-Avatare für glaubwürdige Informationsquellen",
+      "cronbachs_alpha": 0.76,
+      "p_value": 0.001,
+      "pearson": 0.48,
+      "wilks_lambda": 0.72,
+      "items": {
+        "KI01_02": {
+          "name": "Ich halte KI-Avatare für glaubwürdige Informationsquellen",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "KI01_04": {
+      "scale": "KI01",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Ich habe bei KI-Avataren Bedenken, dass sie Meinungen nur simulieren",
+      "cronbachs_alpha": 0.76,
+      "p_value": 0.001,
+      "pearson": 0.48,
+      "wilks_lambda": 0.72,
+      "items": {
+        "KI01_04": {
+          "name": "Ich habe bei KI-Avataren Bedenken, dass sie Meinungen nur simulieren",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "KI01_05": {
+      "scale": "KI01",
+      "target_cohens_d": -4.0,
+      "hypothesis": "H2",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Mir ist wichtig, dass ich weiß, dass es sich um einen KI-Avatar handelt",
+      "cronbachs_alpha": 0.76,
+      "p_value": 0.001,
+      "pearson": 0.48,
+      "wilks_lambda": 0.72,
+      "items": {
+        "KI01_05": {
+          "name": "Mir ist wichtig, dass ich weiß, dass es sich um einen KI-Avatar handelt",
+          "mean_human": 4.95,
+          "mean_ai": 1.05
+        }
+      }
+    },
+    "KI02_01": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Ein unprofessionelles Auftreten",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_01": {
+          "name": "Unterschiede von KI-Avataren: Ein unprofessionelles Auftreten",
+          "mean_human": 2.3,
+          "mean_ai": 4.1
+        }
+      }
+    },
+    "KI02_02": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Eine unsaubere Aussprache und untypische Betonung",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_02": {
+          "name": "Unterschiede von KI-Avataren: Eine unsaubere Aussprache und untypische Betonung",
+          "mean_human": 2.4,
+          "mean_ai": 4.2
+        }
+      }
+    },
+    "KI02_03": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "fehlende Sympathie",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_03": {
+          "name": "Unterschiede von KI-Avataren: fehlende Sympathie",
+          "mean_human": 2.2,
+          "mean_ai": 3.9
+        }
+      }
+    },
+    "KI02_04": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Eine geringe Authentizität",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_04": {
+          "name": "Unterschiede von KI-Avataren: Eine geringe Authentizität",
+          "mean_human": 2.1,
+          "mean_ai": 4.0
+        }
+      }
+    },
+    "KI02_05": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "fehlende Emotionen",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_05": {
+          "name": "Unterschiede von KI-Avataren: fehlende Emotionen",
+          "mean_human": 2.0,
+          "mean_ai": 4.3
+        }
+      }
+    },
+    "KI02_06": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "fehlende persönliche Erfahrungen",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_06": {
+          "name": "Unterschiede von KI-Avataren: fehlende persönliche Erfahrungen",
+          "mean_human": 2.3,
+          "mean_ai": 4.1
+        }
+      }
+    },
+    "KI02_07": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Die Gefahr der Täuschung",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_07": {
+          "name": "Unterschiede von KI-Avataren: Die Gefahr der Täuschung",
+          "mean_human": 2.5,
+          "mean_ai": 3.8
+        }
+      }
+    },
+    "KI02_08": {
+      "scale": "KI02",
+      "target_cohens_d": 1.10,
+      "hypothesis": "H1-H3",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Eine geringere Glaubwürdigkeit",
+      "cronbachs_alpha": 0.89,
+      "p_value": 0.01,
+      "pearson": 0.71,
+      "wilks_lambda": 0.35,
+      "items": {
+        "KI02_08": {
+          "name": "Unterschiede von KI-Avataren: Eine geringere Glaubwürdigkeit",
+          "mean_human": 2.4,
+          "mean_ai": 4.0
+        }
+      }
+    },
+    "KI03": {
+      "scale": "KI03",
+      "target_cohens_d": 0.40,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 5],
+      "page": 8,
+      "description": "Andere KI-Bewertung",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.38,
+      "wilks_lambda": 0.78,
+      "items": {
+        "KI03": {
+          "name": "Andere KI-Bewertung",
+          "mean_human": 2.5,
+          "mean_ai": 3.8
+        }
+      }
+    },
+    "SE01_01": {
+      "scale": "SE",
+      "target_cohens_d": 0.20,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 5],
+      "page": 9,
+      "description": "Wie intensiv konsumierst du Social Media Reels (insb. auf Instagram oder TikTok)?",
+      "cronbachs_alpha": 0.60,
+      "p_value": 0.07,
+      "pearson": 0.35,
+      "wilks_lambda": 0.85,
+      "items": {
+        "SE01_01": {
+          "name": "Wie intensiv konsumierst du Social Media Reels (insb. auf Instagram oder TikTok)?",
+          "mean_human": 3.8,
+          "mean_ai": 3.6
+        }
+      }
+    },
+    "SE01_02": {
+      "scale": "SE",
+      "target_cohens_d": 0.20,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 5],
+      "page": 9,
+      "description": "Wie gut kennst du dich mit Social Media Marketing aus?",
+      "cronbachs_alpha": 0.60,
+      "p_value": 0.07,
+      "pearson": 0.35,
+      "wilks_lambda": 0.85,
+      "items": {
+        "SE01_02": {
+          "name": "Wie gut kennst du dich mit Social Media Marketing aus?",
+          "mean_human": 3.0,
+          "mean_ai": 3.1
+        }
+      }
+    },
+    "SE01_03": {
+      "scale": "SE",
+      "target_cohens_d": 0.20,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 5],
+      "page": 9,
+      "description": "Wie gut kennst du dich mit KI-Avataren aus?",
+      "cronbachs_alpha": 0.60,
+      "p_value": 0.07,
+      "pearson": 0.35,
+      "wilks_lambda": 0.85,
+      "items": {
+        "SE01_03": {
+          "name": "Wie gut kennst du dich mit KI-Avataren aus?",
+          "mean_human": 2.5,
+          "mean_ai": 2.7
+        }
+      }
+    },
+    "SE01_04": {
+      "scale": "SE",
+      "target_cohens_d": 0.20,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 5],
+      "page": 9,
+      "description": "Empfinden Sie Ihre Nutzung sozialer Netzwerke als wichtig?",
+      "cronbachs_alpha": 0.60,
+      "p_value": 0.07,
+      "pearson": 0.35,
+      "wilks_lambda": 0.85,
+      "items": {
+        "SE01_04": {
+          "name": "Empfinden Sie Ihre Nutzung sozialer Netzwerke als wichtig?",
+          "mean_human": 3.6,
+          "mean_ai": 3.5
+        }
+      }
+    },
+    "SE01_05": {
+      "scale": "SE",
+      "target_cohens_d": 0.20,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 5],
+      "page": 9,
+      "description": "Sehen Sie Influencer als wichtigen Marketing-Kanal?",
+      "cronbachs_alpha": 0.60,
+      "p_value": 0.07,
+      "pearson": 0.35,
+      "wilks_lambda": 0.85,
+      "items": {
+        "SE01_05": {
+          "name": "Sehen Sie Influencer als wichtigen Marketing-Kanal?",
+          "mean_human": 3.4,
+          "mean_ai": 3.3
+        }
+      }
+    },
+    "SE02": {
+      "scale": "SE",
+      "target_cohens_d": 0.15,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 5],
+      "page": 9,
+      "description": "Wie häufig konsumieren Sie Reels oder TikToks in soziale Netzwerken?",
+      "cronbachs_alpha": 0.60,
+      "p_value": 0.07,
+      "pearson": 0.30,
+      "wilks_lambda": 0.90,
+      "items": {
+        "SE02": {
+          "name": "Wie häufig konsumieren Sie Reels oder TikToks in soziale Netzwerken (z. B. Instagram, TikTok, Facebook)?",
+          "mean_human": 4.0,
+          "mean_ai": 3.9
+        }
+      }
+    },
+    "SE03_01": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "Instagram",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.25,
+      "wilks_lambda": 0.95,
+      "items": {
+        "SE03_01": {
+          "name": "Instagram (Ziel: ≥75% Nutzung)",
+          "mean_human": 0.90,
+          "mean_ai": 0.70
+        }
+      }
+    },
+    "SE03_02": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "TikTok",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.25,
+      "wilks_lambda": 0.95,
+      "items": {
+        "SE03_02": {
+          "name": "TikTok (Ziel: ≥65% Nutzung)",
+          "mean_human": 0.80,
+          "mean_ai": 0.55
+        }
+      }
+    },
+    "SE03_03": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "Facebook",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.25,
+      "wilks_lambda": 0.95,
+      "items": {
+        "SE03_03": {
+          "name": "Facebook (Ziel: ≥35% Nutzung)",
+          "mean_human": 0.50,
+          "mean_ai": 0.25
+        }
+      }
+    },
+    "SE03_04": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "Snapchat",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.25,
+      "wilks_lambda": 0.95,
+      "items": {
+        "SE03_04": {
+          "name": "Snapchat (Ziel: ≥25% Nutzung)",
+          "mean_human": 0.40,
+          "mean_ai": 0.15
+        }
+      }
+    },
+    "SE03_05": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "YouTube",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.25,
+      "wilks_lambda": 0.95,
+      "items": {
+        "SE03_05": {
+          "name": "YouTube (Ziel: ≥90% Nutzung)",
+          "mean_human": 0.95,
+          "mean_ai": 0.85
+        }
+      }
+    },
+    "SE03_06": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "X/Twitter",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.25,
+      "wilks_lambda": 0.95,
+      "items": {
+        "SE03_06": {
+          "name": "X/Twitter (Ziel: ≥15% Nutzung)",
+          "mean_human": 0.30,
+          "mean_ai": 0.10
+        }
+      }
+    },
+    "SE03_07": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "LinkedIn",
+      "cronbachs_alpha": 0.65,
+      "p_value": 0.07,
+      "pearson": 0.25,
+      "wilks_lambda": 0.95,
+      "items": {
+        "SE03_07": {
+          "name": "LinkedIn (Ziel: ≥25% Nutzung)",
+          "mean_human": 0.45,
+          "mean_ai": 0.20
+        }
+      }
+    },
+    "SE04": {
+      "scale": "SE",
+      "target_cohens_d": 0.10,
+      "hypothesis": "H_exploratory",
+      "scale_range": [0, 1],
+      "page": 9,
+      "description": "Sonstige soziale Netzwerke",
+      "cronbachs_alpha": 0.50,
+      "p_value": 0.07,
+      "pearson": 0.20,
+      "wilks_lambda": 0.98,
+      "items": {
+        "SE04": {
+          "name": "Sonstige soziale Netzwerke",
+          "mean_human": 0.15,
+          "mean_ai": 0.13
+        }
+      }
+    },
+    "SO01": {
+      "scale": "SO",
+      "target_cohens_d": 0.05,
+      "hypothesis": "H_exploratory",
+      "scale_range": [18, 40],
+      "page": 10,
+      "description": "Alter",
+      "cronbachs_alpha": 0.50,
+      "p_value": 0.07,
+      "pearson": 0.10,
+      "wilks_lambda": 0.99,
+      "items": {
+        "SO01": {
+          "name": "Alter: Bitte geben Sie Ihr Alter an (Jahre)",
+          "mean_human": 26.0,
+          "mean_ai": 27.0
+        }
+      }
+    },
+    "SO02": {
+      "scale": "SO",
+      "target_cohens_d": 0.05,
+      "hypothesis": "H_exploratory",
+      "scale_range": [1, 2],
+      "page": 10,
+      "description": "Geschlecht",
+      "cronbachs_alpha": 0.50,
+      "p_value": 0.07,
+      "pearson": 0.10,
+      "wilks_lambda": 0.99,
+      "items": {
+        "SO02": {
+          "name": "Geschlecht: Bitte geben Sie Ihr Geschlecht an (1=männlich, 2=weiblich)",
+          "mean_human": 1.5,
+          "mean_ai": 1.5
+        }
+      }
+    }
+  },
+  "additional_variables": {
+    "demographics": {
+      "age_range": [18, 65],
+      "gender_distribution": [1, 2]
+    },
+    "technical_variables": {
+      "completion_rate": 0.95,
+      "missing_data_rate": 0.05
+    }
+  }
+} 

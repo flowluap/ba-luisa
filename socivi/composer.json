@@ -1,0 +1,12 @@
+{
+    "name": "socivi/chart-generator",
+    "description": "SoSci Survey chart generator",
+    "authors": [
+        {
+            "name": "Developer"
+        }
+    ],
+    "require": {
+        "amenadiel/jpgraph": "^4.1"
+    }
+}

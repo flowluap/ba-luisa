@@ -1,0 +1,163 @@
+=== STATISTIK-BERICHT ===
+
+Gruppe: KI01_01
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.760)
+  p-Wert: 0.0000 (Ziel: 0.0010)
+  Cohen's d: -18.532 (Ziel: -4.0)
+  Wilks Lambda (Ziel): 0.720
+
+Gruppe: KI01_02
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.760)
+  p-Wert: 0.0000 (Ziel: 0.0010)
+  Cohen's d: -13.242 (Ziel: -4.0)
+  Wilks Lambda (Ziel): 0.720
+
+Gruppe: KI01_04
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.760)
+  p-Wert: 0.0000 (Ziel: 0.0010)
+  Cohen's d: -17.158 (Ziel: -4.0)
+  Wilks Lambda (Ziel): 0.720
+
+Gruppe: KI02_01
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 4.156 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: KI02_02
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 4.150 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: KI02_03
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 4.671 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: KI02_04
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 5.397 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: KI02_05
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 6.165 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: KI02_06
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 4.880 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: KI02_07
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 3.702 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: KI02_08
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.890)
+  p-Wert: 0.0000 (Ziel: 0.0100)
+  Cohen's d: 4.128 (Ziel: 1.1)
+  Wilks Lambda (Ziel): 0.350
+
+Gruppe: SE01_01
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.600)
+  p-Wert: 0.0054 (Ziel: 0.0700)
+  Cohen's d: -0.494 (Ziel: 0.2)
+  Wilks Lambda (Ziel): 0.850
+
+Gruppe: SE01_02
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.600)
+  p-Wert: 0.1282 (Ziel: 0.0700)
+  Cohen's d: 0.267 (Ziel: 0.2)
+  Wilks Lambda (Ziel): 0.850
+
+Gruppe: SE01_03
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.600)
+  p-Wert: 0.0858 (Ziel: 0.0700)
+  Cohen's d: 0.303 (Ziel: 0.2)
+  Wilks Lambda (Ziel): 0.850
+
+Gruppe: SE01_05
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.600)
+  p-Wert: 0.1731 (Ziel: 0.0700)
+  Cohen's d: -0.240 (Ziel: 0.2)
+  Wilks Lambda (Ziel): 0.850
+
+Gruppe: SE03_01
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.650)
+  p-Wert: 0.0191 (Ziel: 0.0700)
+  Cohen's d: -0.413 (Ziel: 0.1)
+  Wilks Lambda (Ziel): 0.950
+
+Gruppe: SE03_02
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.650)
+  p-Wert: 0.0001 (Ziel: 0.0700)
+  Cohen's d: -0.722 (Ziel: 0.1)
+  Wilks Lambda (Ziel): 0.950
+
+Gruppe: SE03_03
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.650)
+  p-Wert: 0.0000 (Ziel: 0.0700)
+  Cohen's d: -0.855 (Ziel: 0.1)
+  Wilks Lambda (Ziel): 0.950
+
+Gruppe: SE03_04
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.650)
+  p-Wert: 0.0003 (Ziel: 0.0700)
+  Cohen's d: -0.659 (Ziel: 0.1)
+  Wilks Lambda (Ziel): 0.950
+
+Gruppe: SE03_05
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.650)
+  p-Wert: 0.7204 (Ziel: 0.0700)
+  Cohen's d: -0.063 (Ziel: 0.1)
+  Wilks Lambda (Ziel): 0.950
+
+Gruppe: SE03_06
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.650)
+  p-Wert: 0.0120 (Ziel: 0.0700)
+  Cohen's d: -0.448 (Ziel: 0.1)
+  Wilks Lambda (Ziel): 0.950
+
+Gruppe: SE03_07
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.650)
+  p-Wert: 0.0006 (Ziel: 0.0700)
+  Cohen's d: -0.620 (Ziel: 0.1)
+  Wilks Lambda (Ziel): 0.950
+
+Gruppe: SO02
+  Items: 1
+  Cronbach's Alpha: nan (Ziel: 0.500)
+  p-Wert: 0.7996 (Ziel: 0.0700)
+  Cohen's d: -0.044 (Ziel: 0.05)
+  Wilks Lambda (Ziel): 0.990
+

@@ -1,0 +1,4 @@
+"Statistic","Value","F_Value","p_Value","df1","df2"
+"Pillai's Trace",0.948,373.78,7.15e-77,6,124
+"Wilks Lambda",0.052,373.78,7.15e-77,6,124
+"Hotelling's Trace",18.086,373.78,7.15e-77,6,124

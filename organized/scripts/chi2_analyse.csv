@@ -1,0 +1,4 @@
+"Vergleich","Chi2_Wert","df","p_Wert"
+"Alter vs Geschlecht",19.564,16,0.241
+"Alter vs SM-Plattform",4.07,4,0.397
+"Geschlecht vs SM-Plattform",3.251,4,0.517
