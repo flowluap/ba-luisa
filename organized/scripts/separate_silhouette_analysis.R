@@ -6,7 +6,6 @@
 library(dplyr)
 library(ggplot2)
 library(cluster)
-library(gridExtra)
 
 # =============================================================================
 # LOAD DATA
@@ -36,7 +35,7 @@ vs_cols <- c("VS01_01", "VS01_02", "VS01_03", "VS01_04", "VS01_05", "VS01_06", "
 ea_cols <- c("EA01_01", "EA01_02", "EA01_03", "EA01_04", "EA01_05")
 id_cols <- c("ID01_01", "ID01_02", "ID01_03", "ID01_04")
 
-# Create composite scores for KI group
+# Create composite scores for both groups
 cluster_data_ki <- data.frame(
   VS = rowMeans(data_ki[, vs_cols], na.rm = TRUE),
   MN = rowMeans(data_ki[, mn_cols], na.rm = TRUE),
@@ -44,7 +43,6 @@ cluster_data_ki <- data.frame(
   EA = rowMeans(data_ki[, ea_cols], na.rm = TRUE)
 )
 
-# Create composite scores for Mensch group
 cluster_data_mensch <- data.frame(
   VS = rowMeans(data_mensch[, vs_cols], na.rm = TRUE),
   MN = rowMeans(data_mensch[, mn_cols], na.rm = TRUE),
@@ -79,7 +77,7 @@ sil_mensch <- silhouette(kmeans_mensch$cluster, dist(cluster_data_mensch_clean))
 # =============================================================================
 
 # Function to create traditional silhouette plot with Readme styling
-create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD3C8", "#ABCD9B", "#BE4B5A"), group_type = "ki") {
+create_silhouette_plot <- function(sil_data, title, group_type = "ki") {
   # Convert silhouette object to data frame
   sil_df <- data.frame(
     cluster = sil_data[, 1],
@@ -87,28 +85,24 @@ create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD
     sil_width = sil_data[, 3]
   )
   
-  # Create a new ordering variable that groups by cluster first, then sorts by silhouette width within each cluster
+  # Create ordering: cluster first, then silhouette width within cluster
   sil_df$cluster_order <- sil_df$cluster
   sil_df$within_cluster_order <- ave(sil_df$sil_width, sil_df$cluster, FUN = function(x) rank(x, ties.method = "first"))
-  
-  # Create the final ordering: cluster first, then silhouette width within cluster
   sil_df$final_order <- sil_df$cluster_order * 1000 + sil_df$within_cluster_order
-  
-  # Sort by the final ordering
   sil_df <- sil_df[order(sil_df$final_order), ]
   
   # Create cluster labels based on group type
-  if (group_type == "ki") {
-    cluster_labels <- c("KI-Offen", "Ambivalent", "KI-Skeptisch")
+  cluster_labels <- if (group_type == "ki") {
+    c("KI-Offen", "Ambivalent", "KI-Skeptisch")
   } else {
-    cluster_labels <- c("Emotional Offen", "Ambivalent", "Emotional Distanziert")
+    c("Emotional Offen", "Ambivalent", "Emotional Distanziert")
   }
   
-  # Create traditional silhouette plot with cluster grouping
-  p <- ggplot(sil_df, aes(x = sil_width, y = reorder(seq_along(sil_width), final_order), 
-                          fill = factor(cluster, labels = cluster_labels))) +
+  # Create plot
+  ggplot(sil_df, aes(x = sil_width, y = reorder(seq_along(sil_width), final_order), 
+                     fill = factor(cluster, labels = cluster_labels))) +
     geom_bar(stat = "identity", width = 0.8, color = "black", linewidth = 0.3) +
-    scale_fill_manual(values = colors, name = "Cluster") +
+    scale_fill_manual(values = c("#8DD3C8", "#ABCD9B", "#BE4B5A"), name = "Cluster") +
     labs(title = title,
          x = "Silhouette-Breite",
          y = "Beobachtungen",
@@ -120,7 +114,7 @@ create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD
     theme(
       axis.title = element_text(size = 11, family = "Times New Roman"),
       axis.text = element_text(size = 10, family = "Times New Roman"),
-      axis.text.y = element_blank(),  # Hide y-axis labels for cleaner look
+      axis.text.y = element_blank(),
       plot.title = element_text(size = 12, hjust = 0.5, face = "bold", family = "Times New Roman"),
       legend.title = element_text(size = 11, family = "Times New Roman"),
       legend.text = element_text(size = 10, family = "Times New Roman"),
@@ -139,31 +133,27 @@ create_traditional_silhouette_plot <- function(sil_data, title, colors = c("#8DD
       axis.ticks.length.x = unit(0, "pt")
     ) +
     xlim(min(sil_df$sil_width) - 0.1, max(sil_df$sil_width) + 0.1)
-  
-  return(p)
 }
 
 # Create silhouette plots for both groups
-sil_plot_ki <- create_traditional_silhouette_plot(sil_ki, "Silhouette-Analyse: KI-Gruppe", group_type = "ki")
-sil_plot_mensch <- create_traditional_silhouette_plot(sil_mensch, "Silhouette-Analyse: Mensch-Gruppe", group_type = "mensch")
+sil_plot_ki <- create_silhouette_plot(sil_ki, "Silhouette-Analyse: KI-Gruppe", "ki")
+sil_plot_mensch <- create_silhouette_plot(sil_mensch, "Silhouette-Analyse: Mensch-Gruppe", "mensch")
 
 # =============================================================================
-# SAVE SEPARATE PLOTS
+# SAVE PLOTS
 # =============================================================================
 
-cat("=== SPEICHERE SEPARATE PLOTS ===\n")
+cat("=== SPEICHERE PLOTS ===\n")
 
 # Create directory
 dir.create("organized/images/clustering", recursive = TRUE, showWarnings = FALSE)
 
-# Save separate plots
+# Save plots
 ggsave("organized/images/clustering/ki_silhouette_analysis.png", 
-       sil_plot_ki, width = 8, height = 6, dpi = 300, bg = "white", 
-       limitsize = FALSE)
+       sil_plot_ki, width = 8, height = 6, dpi = 300, bg = "white", limitsize = FALSE)
 
 ggsave("organized/images/clustering/mensch_silhouette_analysis.png", 
-       sil_plot_mensch, width = 8, height = 6, dpi = 300, bg = "white", 
-       limitsize = FALSE)
+       sil_plot_mensch, width = 8, height = 6, dpi = 300, bg = "white", limitsize = FALSE)
 
 cat("✓ ki_silhouette_analysis.png erstellt\n")
 cat("✓ mensch_silhouette_analysis.png erstellt\n")
@@ -202,17 +192,6 @@ for(i in 1:nrow(sil_summary_mensch)) {
   cat("  Cluster", sil_summary_mensch$cluster[i], ":", round(sil_summary_mensch$x[i], 3), "\n")
 }
 
-cat("\n=== INTERPRETATION ===\n")
-cat("Die Silhouette-Analysen zeigen die Qualität der Cluster-Zuordnung.\n")
-cat("Positive Werte = gute Zuordnung, negative Werte = schlechte Zuordnung.\n")
-cat("Breitere Balken = höhere Silhouette-Breite = bessere Cluster-Qualität.\n")
-cat("Rote gestrichelte Linie = durchschnittliche Silhouette-Breite.\n")
-
-cat("\n=== FARBEN ===\n")
-cat("Cluster 1: #8DD3C8 (Hellblau/Türkis)\n")
-cat("Cluster 2: #ABCD9B (Hellgrün)\n")
-cat("Cluster 3: #BE4B5A (Rot)\n")
-
 cat("\n================================================================================\n")
 cat("SEPARATE SILHOUETTE ANALYSIS COMPLETED\n")
 cat("================================================================================\n")
@@ -224,11 +203,5 @@ cat("\nSilhouette-Interpretation:\n")
 cat("- > 0.7: Starke Cluster-Struktur\n")
 cat("- 0.5-0.7: Mittlere Cluster-Struktur\n")
 cat("- < 0.5: Schwache Cluster-Struktur\n")
-
-cat("\nVorteile der separaten Plots:\n")
-cat("- Traditionelle Silhouette-Darstellung\n")
-cat("- Konsistenter Style mit Readme-Richtlinien\n")
-cat("- Detaillierte Analyse jeder Gruppe\n")
-cat("- Professionelle Darstellung für Bachelorarbeit\n")
 
 cat("\n================================================================================\n") 
